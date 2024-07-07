@@ -10,6 +10,7 @@ import {
   IonText,
   IonToggle
 } from '@ionic/angular/standalone';
+import {CapacitorFlash} from "@capgo/capacitor-flash";
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,20 @@ export class HomePage {
   }
 
   flash(){
+    this.active = !this.active;
 
+    if (this.active) {
+      CapacitorFlash.switchOn({intensity: 100}).then(r =>{
+        console.log("Flashlight ON");
+      }).catch(error => {
+        console.error("Error switching on flashlight", error);
+      });
+    } else {
+      CapacitorFlash.switchOff().then(r => {
+        console.log("Flashlight OFF");
+      }).catch(error => {
+        console.log("Error switching off flashlight", error);
+      });
+    }
   }
 }

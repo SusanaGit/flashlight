@@ -12,6 +12,7 @@ import {
   ActionSheetController, IonLabel, IonList, IonItem, IonAlert
 } from '@ionic/angular/standalone';
 import {CapacitorFlash} from "@capgo/capacitor-flash";
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -25,8 +26,10 @@ export class HomePage {
 
   public active: boolean;
 
-  constructor(private actionSheetCtrl: ActionSheetController) {
+  constructor(private actionSheetCtrl: ActionSheetController, public userService: UserService) {
+
     this.active = false;
+
   }
 
   // PLUG0: CAPACITOR-FLASH
@@ -80,11 +83,22 @@ export class HomePage {
   }
 
   // PLUG2: ALERT INPUT
-  public alertButtons = [''];
+  public alertButtons = [{}];
   public alertInputs = [{}];
 
   initializeAlertInput() {
-    this.alertButtons = ['OK'];
+    this.alertButtons = [
+      {
+        type: 'button',
+        text: 'your selfie',
+        handler: () => {
+          this.userService.addNewUser();
+        }
+      },
+      {
+        text: 'OK:)'
+      },
+];
     this.alertInputs = [
       {
         placeholder: 'Name',

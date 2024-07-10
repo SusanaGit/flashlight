@@ -9,7 +9,7 @@ import {
   IonCol,
   IonText,
   IonToggle, IonButton,
-  ActionSheetController, IonLabel, IonList, IonItem
+  ActionSheetController, IonLabel, IonList, IonItem, IonAlert
 } from '@ionic/angular/standalone';
 import {CapacitorFlash} from "@capgo/capacitor-flash";
 
@@ -18,19 +18,18 @@ import {CapacitorFlash} from "@capgo/capacitor-flash";
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonText, IonToggle, IonButton, IonLabel, IonList, IonItem],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonText, IonToggle, IonButton, IonLabel, IonList, IonItem, IonAlert],
 })
 
 export class HomePage {
 
   public active: boolean;
-  private actionSheetController: any;
 
   constructor(private actionSheetCtrl: ActionSheetController) {
     this.active = false;
   }
 
-  // CAPACITOR-FLASH
+  // PLUG0: CAPACITOR-FLASH
   flash(){
     this.active = !this.active;
 
@@ -49,7 +48,7 @@ export class HomePage {
     }
   }
 
-  // ACTION SHEET CONTROLLER
+  // PLUG1: ACTION SHEET CONTROLLER
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Actions',
@@ -78,5 +77,34 @@ export class HomePage {
     });
 
     await actionSheet.present();
+  }
+
+  // PLUG2: ALERT INPUT
+  public alertButtons = [''];
+  public alertInputs = [{}];
+
+  initializeAlertInput() {
+    this.alertButtons = ['OK'];
+    this.alertInputs = [
+      {
+        placeholder: 'Name',
+      },
+      {
+        placeholder: 'Nickname (max 8 characters)',
+        attributes: {
+          maxlength: 8,
+        },
+      },
+      {
+        type: 'number',
+        placeholder: 'Age',
+        min: 1,
+        max: 100,
+      },
+      {
+        type: 'textarea',
+        placeholder: 'A little about yourself',
+      },
+    ];
   }
 }

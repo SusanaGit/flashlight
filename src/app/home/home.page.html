@@ -10,8 +10,8 @@
   <ion-grid>
 
     <!-- CAPACITOR-FLASH -->
-    <ion-row class="row-principal">
-      <ion-list class="lista">
+    <ion-row>
+      <ion-list>
         <ion-item>
           <ion-label>npm install capgo/capacitor-flash</ion-label>
         </ion-item>
@@ -30,13 +30,26 @@
     </ion-row>
 
     <!-- ACTION SHEET CONTROLLER -->
-    <ion-row class="row-principal">
-      <ion-list class="lista">
+    <ion-row>
+      <ion-list>
         <ion-item>
           <ion-label>action-sheet-controller</ion-label>
         </ion-item>
         <ion-item>
           <ion-button (click)="presentActionSheet()">Open</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-row>
+
+    <!-- ION ALERT INPUTS -->
+    <ion-row>
+      <ion-list>
+        <ion-item>
+          <ion-label>ionicframework.com/docs/api/alert</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-button id="present-alert" (click)="initializeAlertInput()">Click Me</ion-button>
+          <ion-alert trigger="present-alert" header="Please enter your info" [buttons]="alertButtons" [inputs]="alertInputs"></ion-alert>
         </ion-item>
       </ion-list>
     </ion-row>

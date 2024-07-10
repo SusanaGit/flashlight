@@ -8,7 +8,8 @@ import {
   IonRow,
   IonCol,
   IonText,
-  IonToggle
+  IonToggle, IonButton,
+  ActionSheetController, IonLabel, IonList, IonItem
 } from '@ionic/angular/standalone';
 import {CapacitorFlash} from "@capgo/capacitor-flash";
 
@@ -17,16 +18,19 @@ import {CapacitorFlash} from "@capgo/capacitor-flash";
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonText, IonToggle],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonText, IonToggle, IonButton, IonLabel, IonList, IonItem],
 })
+
 export class HomePage {
 
   public active: boolean;
+  private actionSheetController: any;
 
-  constructor() {
+  constructor(private actionSheetCtrl: ActionSheetController) {
     this.active = false;
   }
 
+  // CAPACITOR-FLASH
   flash(){
     this.active = !this.active;
 
@@ -43,5 +47,36 @@ export class HomePage {
         console.log("Error switching off flashlight", error);
       });
     }
+  }
+
+  // ACTION SHEET CONTROLLER
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Actions',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          data: {
+            action: 'delete',
+          },
+        },
+        {
+          text: 'Share',
+          data: {
+            action: 'share',
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          data: {
+            action: 'cancel',
+          },
+        },
+      ],
+    });
+
+    await actionSheet.present();
   }
 }

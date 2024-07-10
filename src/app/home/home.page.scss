@@ -1,3 +1,25 @@
-ion-toggle {
-  zoom: 2;
+ion-content {
+  --background: none;
+  background-image: url('./../../assets/corazones-fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+ion-list {
+  margin-top: 10px;
+  width: 100%;
+
+  ion-label {
+    text-decoration-line: underline;
+    text-align: center;
+  }
+
+  ion-item {
+    display: flex;
+    flex-direction: column;
+    --inner-border-width: 0;
+    --background: none;
+    background-color: beige;
+  }
 }
